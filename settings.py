@@ -8,6 +8,8 @@ else:
 	MONGO_URI = 'mongodb://localhost:27017/main'
 
 
+X_HEADERS = ['Content-Type', 'Authorization', 'X-HTTP-Method-Override', 'If-Match', 'X-Requested-With']
+URL_PREFIX = 'api'
 X_DOMAINS = '*'
 RESOURCE_METHODS = ['GET', 'POST']
 ITEM_METHODS = ['GET', 'PUT']
