@@ -79,7 +79,7 @@ washer_schema = {
     }
 }
 
-subs_schema {
+subs_schema = {
 	'plan_start': {
 		'type': 'datetime',
 		'readonly': True
