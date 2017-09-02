@@ -6,14 +6,19 @@ import os, json
 DEFAULT_PASSW = "hack-the-city-2017"
 
 class MyBasicAuth(BasicAuth):
-    def check_auth(self, username, password, allowed_roles, resource,
-                   method):
+    def check_auth(self, username, password, allowed_roles, resource, method):
+    	print(method, resource, request.path)
+    	if resource is not None:
+    		# allow signup/login
+	    	if (method == "POST"):
+	    		print("signup/login")
+	    		return True
         return password == DEFAULT_PASSW
 
 def authenticate(self):
     resp = Response(None, 401)
-    abort(401, description='Please provide proper credentials',
-          response=resp)
+    abort(401, description='Please provide proper credentials', response=resp)
+
 # override auth fn
 MyBasicAuth.authenticate = authenticate
 
@@ -56,8 +61,8 @@ def login():
 	
 	return reply(reply_auth)
 
-
 def before_client_insert(resource):
+	print("client reg")
 	resource = resource[0]
 	washer = current_app.data.driver.db['washer']
 	# check if washer collection contains the email
@@ -65,8 +70,10 @@ def before_client_insert(resource):
 	if washer_match is not None:
 		raise Exception('email not unique')
 	resource["password"] = DEFAULT_PASSW
+	resource = [resource]
 
 def before_washer_insert(resource):
+	print("washer reg")
 	resource = resource[0]
 	client = current_app.data.driver.db['client']
 	# check if client collection contains the email
@@ -74,6 +81,7 @@ def before_washer_insert(resource):
 	if washer_match is not None:
 		raise Exception('email not unique')
 	resource["password"] = DEFAULT_PASSW
+	resource = [resource]
 
 app.on_insert_client += before_client_insert
 app.on_insert_washer += before_washer_insert
