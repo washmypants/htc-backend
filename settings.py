@@ -113,7 +113,32 @@ subs_schema {
 	}
 }
 
+client = {
+    'item_title': 'client',
+    'resource_methods': ['POST'],
+    'schema': client_schema,
+    'cache_control': 'max-age=5,must-revalidate',
+    'cache_expires': 5
+}
+
+subs = {
+    'item_title': 'sub',
+    'resource_methods': [],
+    'schema': subs_schema,
+    'cache_control': 'max-age=5,must-revalidate',
+    'cache_expires': 5
+}
+
+washer = {
+    'item_title': 'sub',
+    'resource_methods': ['POST'],
+    'cache_control': 'max-age=5,must-revalidate',
+    'cache_expires': 5
+	'schema': washer_schema
+}
 
 DOMAIN = {
-
+	'client': client,
+	'subs': subs,
+	'washer': washer
 }
