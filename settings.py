@@ -76,7 +76,12 @@ washer_schema = {
         'type': 'string',
         'minlength': 6,
         'required': True
-    }
+    },
+	'balance': {
+		'type': 'float',
+		'default': 00.00,
+		'readonly': True
+	}
 }
 
 subs_schema = {
@@ -109,6 +114,11 @@ subs_schema = {
 	'wash_done': {
 		'type': 'integer',
 		'default': 0,
+		'readonly': True
+	},
+	'paid': {
+		'type': 'boolean',
+		'default': False,
 		'readonly': True
 	}
 }
