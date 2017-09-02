@@ -133,14 +133,14 @@ client = {
 
 subs = {
     'item_title': 'sub',
-    'resource_methods': [],
+    'resource_methods': ['POST'],
     'schema': subs_schema,
     'cache_control': 'max-age=5,must-revalidate',
     'cache_expires': 5
 }
 
 washer = {
-    'item_title': 'sub',
+    'item_title': 'washer',
     'resource_methods': ['POST'],
     'cache_control': 'max-age=5,must-revalidate',
     'cache_expires': 5,
