@@ -78,7 +78,7 @@ def before_washer_insert(resource):
 	client = current_app.data.driver.db['client']
 	# check if client collection contains the email
 	client_match = client.find_one({'email': resource["email"]})
-	if washer_match is not None:
+	if client_match is not None:
 		raise Exception('email not unique')
 	resource["password"] = DEFAULT_PASSW
 	resource = [resource]
