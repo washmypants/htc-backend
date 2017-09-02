@@ -133,7 +133,7 @@ washer = {
     'item_title': 'sub',
     'resource_methods': ['POST'],
     'cache_control': 'max-age=5,must-revalidate',
-    'cache_expires': 5
+    'cache_expires': 5,
 	'schema': washer_schema
 }
 
