@@ -83,6 +83,7 @@ def new_sub():
 		"wash_price": 25,
 		"wash_weekly": content["weeklyWash"],
 		"wash_done": 0,
+		"taken": False,
 		"paid": True
 	}
 	insert_id = subs.insert_one(sub).inserted_id
@@ -93,6 +94,18 @@ def new_sub():
 		sub_reply["success"] = True
 
 	return reply(sub_reply)
+
+@app.route('/api/all_available_subs', methods=["OPTIONS", "GET"])
+def all_available_subs():
+	if request.method == 'OPTIONS':
+		return CORS_reply()
+	subs_reply = {'success': False}
+	subs = current_app.data.driver.db['subs']
+	subs_reply["active_subs"] = []
+	for sub in subs.find({"taken": False}):
+		subs_reply["active_subs"].append(sub)
+	subs_reply["success"] = True # no errors
+	return reply(subs_reply)
 
 
 def before_client_insert(resource):

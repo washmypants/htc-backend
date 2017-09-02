@@ -13,7 +13,6 @@ URL_PREFIX = 'api'
 X_DOMAINS = '*'
 RESOURCE_METHODS = ['GET', 'POST']
 ITEM_METHODS = ['GET', 'PUT']
-ALLOWED_FILTERS = []
 PAGINATION = False
 PAGINATION_LIMIT = 0
 PAGINATION_DEFAULT = 0
@@ -110,6 +109,11 @@ subs_schema = {
 	'wash_done': {
 		'type': 'integer',
 		'default': 0,
+		'readonly': True
+	},
+	'taken': {
+		'type': 'boolean',
+		'default': False,
 		'readonly': True
 	},
 	'paid': {
