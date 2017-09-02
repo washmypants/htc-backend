@@ -10,7 +10,108 @@ else:
 
 X_DOMAINS = '*'
 RESOURCE_METHODS = ['GET', 'POST']
+ITEM_METHODS = ['GET', 'PUT']
+ALLOWED_FILTERS = []
+PAGINATION = False
+PAGINATION_LIMIT = 0
+PAGINATION_DEFAULT = 0
+OPTIMIZE_PAGINATION_FOR_SPEED = True
+HATEOAS = False
+AUTH_FIELD = True
 
+client_schema = {
+    'email': {
+        'email': True,
+        'type': 'string',
+        'minlength': 3,
+        'unique': True,
+        'required': True
+    },
+    'full_name': {
+        'type': 'string',
+        'required': True
+    },
+    'address': {
+        'type': 'string',
+        'required': True
+    },
+    '''
+    	active subscription id (reference)
+    '''
+    'sub_id': {
+        'type': 'string',
+        'required': True
+    },
+    'password': {
+        'type': 'string',
+        'minlength': 6,
+        'required': True
+    }
+}
+
+washer_schema = {
+    'email': {
+        'email': True,
+        'type': 'string',
+        'minlength': 3,
+        'unique': True,
+        'required': True
+    },
+    'full_name': {
+        'type': 'string',
+        'required': True
+    },
+    'address': {
+        'type': 'string',
+        'required': True
+    },
+    '''
+    	running subscription ids (reference)
+    '''
+    'running_sub_id': {
+        'type': 'list',
+        'required': True
+    },
+    'password': {
+        'type': 'string',
+        'minlength': 6,
+        'required': True
+    }
+}
+
+subs_schema {
+	'plan_start': {
+		'type': 'datetime',
+		'readonly': True
+	},
+	'plan_end': {
+		'type': 'datetime',
+		'readonly': True
+	},
+	'wash_total': {
+		'type': 'integer',
+		'default': 0,
+		'readonly': True
+	},
+	'''
+		price for 1 wash
+	'''
+	'wash_price': {
+		'type': 'float',
+		'default': 25.00,
+		'readonly': True
+	},
+	'wash_weekly': {
+		'type': 'integer',
+		'default': 0,
+		'readonly': True
+	},
+	'wash_done': {
+		'type': 'integer',
+		'default': 0,
+		'readonly': True
+	}
+}
 
 
 DOMAIN = {
