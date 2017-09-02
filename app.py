@@ -61,6 +61,40 @@ def login():
 	
 	return reply(reply_auth)
 
+@app.route('/api/new_sub', methods=["OPTIONS", "POST"])
+def new_sub():
+	if request.method == 'OPTIONS':
+		return CORS_reply()
+	sub_reply = {"success": False}
+	content = request.get_json(silent=True)
+	user_email = content["email"]
+	client = current_app.data.driver.db['client']
+	client_match = client.find_one({"email": user_email})
+	if client_match is None:
+		return reply(sub_reply)
+
+	if "sub_id" in client_match:
+		return reply(sub_reply)
+
+	subs = current_app.data.driver.db['subs']
+	sub = {
+		'plan_start': content["startDate"],
+		'wash_total': content["totalWash"],
+		"wash_price": 25,
+		"wash_weekly": content["weeklyWash"],
+		"wash_done": 0,
+		"paid": True
+	}
+	insert_id = subs.insert_one(sub).inserted_id
+	print insert_id
+	client.update_one({'email': user_email}, {'$set': {'sub_id': insert_id}}, upsert=False)
+
+	if insert_id is not None:
+		sub_reply["success"] = True
+
+	return reply(sub_reply)
+
+
 def before_client_insert(resource):
 	print("client reg")
 	resource = resource[0]

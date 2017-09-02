@@ -89,10 +89,6 @@ subs_schema = {
 		'type': 'datetime',
 		'readonly': True
 	},
-	'plan_end': {
-		'type': 'datetime',
-		'readonly': True
-	},
 	'wash_total': {
 		'type': 'integer',
 		'default': 0,
@@ -124,8 +120,12 @@ subs_schema = {
 }
 
 client = {
+    'additional_lookup': {
+        'url': 'regex("[\w]+")',
+        'field': 'email'
+    },
     'item_title': 'client',
-    'resource_methods': ['POST'],
+    'resource_methods': ['GET', 'POST'],
     'schema': client_schema,
     'cache_control': 'max-age=5,must-revalidate',
     'cache_expires': 5
@@ -133,15 +133,19 @@ client = {
 
 subs = {
     'item_title': 'sub',
-    'resource_methods': ['POST'],
+    'resource_methods': ['GET'],
     'schema': subs_schema,
     'cache_control': 'max-age=5,must-revalidate',
     'cache_expires': 5
 }
 
 washer = {
+    'additional_lookup': {
+        'url': 'regex("[\w]+")',
+        'field': 'email'
+    },
     'item_title': 'washer',
-    'resource_methods': ['POST'],
+    'resource_methods': ['GET', 'POST'],
     'cache_control': 'max-age=5,must-revalidate',
     'cache_expires': 5,
 	'schema': washer_schema
