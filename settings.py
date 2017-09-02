@@ -23,7 +23,6 @@ AUTH_FIELD = True
 
 client_schema = {
     'email': {
-        'email': True,
         'type': 'string',
         'minlength': 3,
         'unique': True,
@@ -42,7 +41,7 @@ client_schema = {
     '''
     'sub_id': {
         'type': 'string',
-        'required': True
+        'readonly': True
     },
     'password': {
         'type': 'string',
@@ -53,7 +52,6 @@ client_schema = {
 
 washer_schema = {
     'email': {
-        'email': True,
         'type': 'string',
         'minlength': 3,
         'unique': True,
@@ -72,7 +70,7 @@ washer_schema = {
     '''
     'running_sub_id': {
         'type': 'list',
-        'required': True
+        'readonly': True
     },
     'password': {
         'type': 'string',
