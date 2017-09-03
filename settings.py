@@ -35,12 +35,10 @@ client_schema = {
         'type': 'string',
         'required': True
     },
-    '''
-    	active subscription id (reference)
-    '''
     'sub_id': {
         'type': 'string',
-        'readonly': True
+        'readonly': True,
+        'default': ''
     },
     'password': {
         'type': 'string',
@@ -64,12 +62,9 @@ washer_schema = {
         'type': 'string',
         'required': True
     },
-    '''
-    	running subscription ids (reference)
-    '''
     'running_sub_id': {
         'type': 'list',
-        'readonly': True
+        'default': []
     },
     'password': {
         'type': 'string',
@@ -93,9 +88,6 @@ subs_schema = {
 		'default': 0,
 		'readonly': True
 	},
-	'''
-		price for 1 wash
-	'''
 	'wash_price': {
 		'type': 'float',
 		'default': 25.00,
@@ -116,6 +108,10 @@ subs_schema = {
 		'default': False,
 		'readonly': True
 	},
+	'address': {
+		'type': 'string',
+		'readonly': True
+	},
 	'paid': {
 		'type': 'boolean',
 		'default': False,
@@ -131,16 +127,16 @@ client = {
     'item_title': 'client',
     'resource_methods': ['GET', 'POST'],
     'schema': client_schema,
-    'cache_control': 'max-age=5,must-revalidate',
-    'cache_expires': 5
+    'cache_control': '',
+    'cache_expires': 1
 }
 
 subs = {
     'item_title': 'sub',
     'resource_methods': ['GET'],
     'schema': subs_schema,
-    'cache_control': 'max-age=5,must-revalidate',
-    'cache_expires': 5
+    'cache_control': '',
+    'cache_expires': 1
 }
 
 washer = {
@@ -150,8 +146,8 @@ washer = {
     },
     'item_title': 'washer',
     'resource_methods': ['GET', 'POST'],
-    'cache_control': 'max-age=5,must-revalidate',
-    'cache_expires': 5,
+    'cache_control': '',
+    'cache_expires': 1,
 	'schema': washer_schema
 }
 
